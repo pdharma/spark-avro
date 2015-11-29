@@ -8,7 +8,7 @@ crossScalaVersions := Seq("2.10.5", "2.11.7")
 
 spName := "databricks/spark-avro"
 
-sparkVersion := "1.4.1"
+sparkVersion := "1.5.2"
 
 val testSparkVersion = settingKey[String]("The version of Spark to test against.")
 
@@ -16,9 +16,7 @@ testSparkVersion := sys.props.getOrElse("spark.testVersion", sparkVersion.value)
 
 val testHadoopVersion = settingKey[String]("The version of Hadoop to test against.")
 
-testHadoopVersion := sys.props.getOrElse("hadoop.testVersion", "2.2.0")
-
-resolvers += "Spark 1.5.0 RC2 Staging" at "https://repository.apache.org/content/repositories/orgapachespark-1141"
+testHadoopVersion := sys.props.getOrElse("hadoop.testVersion", "2.6.0")
 
 spAppendScalaVersion := true
 

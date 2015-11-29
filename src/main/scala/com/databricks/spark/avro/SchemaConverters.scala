@@ -237,6 +237,10 @@ private object SchemaConverters {
           schemaBuilder.record(structName).namespace(recordNamespace),
           recordNamespace)
 
+      case udt: UserDefinedType[_] =>
+        val dt = udt.sqlType
+        convertTypeToAvro(dataType.asInstanceOf[dt.type], schemaBuilder, structName, recordNamespace)
+
       case other => throw new IllegalArgumentException(s"Unexpected type $dataType.")
     }
   }
@@ -279,6 +283,10 @@ private object SchemaConverters {
           structType,
           newFieldBuilder.record(structName).namespace(recordNamespace),
           recordNamespace)
+
+      case udt: UserDefinedType[_] =>
+        val dt = udt.sqlType
+        convertFieldTypeToAvro(udt.asInstanceOf[dt.type], newFieldBuilder, structName, recordNamespace)
 
       case other => throw new UnsupportedOperationException(s"Unexpected type $dataType.")
     }

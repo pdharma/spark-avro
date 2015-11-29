@@ -158,6 +158,11 @@ private[avro] class AvroOutputWriter(
             record
           }
         }
+
+      case udt: UserDefinedType[_] =>
+        val dt = udt.sqlType
+        createConverterToAvro(udt.asInstanceOf[dt.type], structName, recordNamespace)
+
     }
   }
 }
